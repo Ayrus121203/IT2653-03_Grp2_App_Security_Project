@@ -1,0 +1,30 @@
+body {
+background-image: linear-gradient(to right top, #040618, #080314, #0a020f, #0a0109, #070004, #080004, #090004, #0a0004, #100009, #13000f, #140115, #14021a);
+}
+
+.gradient-custom-3 {
+background-image: url(static/images/github_bg.gif)
+/* fallback for old browsers */
+background: #0c1c0f;
+/* Chrome 10-25, Safari 5.1-6 */
+background: -webkit-linear-gradient(to right, rgba(12, 22, 15, 0), rgba(12, 22, 15, 0));
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: linear-gradient(to right, rgba(12, 22, 15, 0), rgba(12, 22, 15, 0));
+padding:30px
+}
+
+.gradient-custom-4 {
+background-image: url(static/images/github_bg.gif)
+padding:30px;
+/* fallback for old browsers */
+background: #0c160f;
+/* Chrome 10-25, Safari 5.1-6 */
+background: -webkit-linear-gradient(to right, rgba(13, 21, 176, 0.5), rgba(1, 24, 244, 0.5));
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: linear-gradient(to right, rgba(13, 20, 176, 0.5), rgba(14, 21, 244, 0.5));
+}
+
+.gradient-login-btn {
+color:#f0dbff;
+background-image: linear-gradient(to right top, #ab68a4, #a171af, #9679b8, #8a81bf, #7f88c4, #7787c4, #6f86c3, #6685c3, #5f7cbf, #5973bb, #5569b7, #5160b2);
+}

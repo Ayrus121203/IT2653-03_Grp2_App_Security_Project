@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<br/>
+<h2>You searched for: <strong><em>{{ searched }}</em></strong></h2>
+<br/>
+
+
+{% if posts %}
+{% for post in posts %}
+
+<div class="shadow p-3 mb-5 bg-body rounded">
+<h3>Title: {{ post.title }}</h3><br/>
+    <small>
+        Author: {{ post.poster.username }}<br/>
+        Date Posted: {{ post.date_posted }}<br/>
+    </small>
+    <br/>
+    Content: {{ post.content|safe }}<br/><br/>
+    <br/>
+    <a href="{{ url_for('post',id=post.id) }}" class="btn btn-outline-primary btn-sm">View Posts</a>
+
+    {% if post.poster_id == current_user.id %}
+    <a href="{{ url_for('edit_post',id=post.id) }}" class="btn btn-outline-primary btn-sm">Edit Post</a>
+    <a href="{{ url_for('delete_post',id=post.id) }}" class="btn btn-outline-danger btn-sm">Delete Post</a>
+    {% endif %}
+
+
+</div>
+<br/>
+
+{% endfor %}
+
+{% else %}
+Sorry, your searched term <strong><em>{{ searched }}</em></strong> was not found
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends 'base_index.html' %}
+
+{% block content %}
+
+        <link rel="stylesheet" href="/static/css/cover.css">
+        <title>Ubermelon. Melons when you want them.</title>
+        <style>
+            body {
+                background-image: url("static/images/home_greet.jpg");
+                background-size: cover;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;*/
+            }
+
+            div.inner.cover img {
+                width: 150px;
+            }
+            .button {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgb(145, 92, 182);
+  padding: 15px 40px;
+  border-radius: 4px;
+  font-weight: normal;
+  text-transform: uppercase;
+  transition: all 0.2s ease-in-out;
+}
+
+.glow-button:hover {
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+}
+        </style>
+<div class="container mt-3">
+    {% with messages = get_flashed_messages(category_filter=["success"]) %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    {% with messages = get_flashed_messages(category_filter=["warning"]) %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+{% with messages = get_flashed_messages(category_filter=["error"]) %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+{% endwith %}
+  {% with messages = get_flashed_messages(category_filter=["info"]) %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+{% endwith %}
+</div>
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+          <div class="inner cover">
+              <br/><br/><br/>
+              <h1 class="cover-heading">Flasker</h1>
+              <br/>
+
+            <p class="lead">
+            <p class="lead">
+            <a href="{{ url_for('add_user') }}" class="button glow-button">Register Now!</a>
+            </p>
+              <br/>
+              <p class="lead">
+            <p class="lead">
+            <a href="{{ url_for('login') }}" class="button glow-button">Login Now!</a>
+            </p>
+          </div>
+
+          <div class="mastfoot">
+            <div class="inner" style="color:#ffffff; margin-top: 10px">
+                <p>Copyright Flasker 2022. All rights reserved.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+{% endblock %}

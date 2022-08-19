@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% from "includes/_formHelper.html" import render_field %}
+{% block content %}
+<link href="{{ url_for('static',filename='css/register.css') }}" rel="stylesheet">
+
+<div class="container mt-3">
+{% with messages = get_flashed_messages(category_filter=["success"]) %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+{% with messages = get_flashed_messages(category_filter=["warning"]) %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+{% endwith %}
+
+
+{% with messages = get_flashed_messages(category_filter=["error"]) %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+2  {% endfor %}
+{% endif %}
+{% endwith %}
+
+</div>
+<section class="vh-200 gradient-custom">
+
+  <div class="mask d-flex align-items-center h-200 gradient-custom-3">
+    <div class="container h-200">
+      <div class="row d-flex justify-content-center align-items-center h-200">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Verify Using Phone Number</h2>
+
+              <form method="POST">
+                {{ form.csrf_token }}
+                <div class="form-outline mb-3">
+                    {{ render_field(form.forgetpassotp, class="form-control") }}
+                      <br/>
+                  </div>
+
+                <div class="d-flex justify-content-center">
+                    {{ form.submit(class="btn btn-success btn-block btn-lg gradient-custom-4 text-body") }}
+                </div>
+              </form>
+              <p class="text-center text-muted mt-5 mb-0" id="countdown"></p>
+              <p class="text-center text-muted mt-5 mb-0">You will be redirected back to the previous page if the countdown expires.</p>
+
+              <script>
+                let timerOn = true;
+                function timer(remaining) {
+                  var m = Math.floor(remaining / 60);
+                  var s = remaining % 60;
+                  m = m < 10 ? "0" + m : m;
+                  s = s < 10 ? "0" + s : s;
+                  document.getElementById("countdown").innerHTML = `OTP Valid For: ${m} : ${s}`;
+                  remaining -= 1;
+                  if (remaining >= 0 && timerOn) {
+                    setTimeout(function () {
+                      timer(remaining);
+                    }, 1000);
+                    document.getElementById("resend").innerHTML = `
+                    `;
+                    return;
+                  }
+                  if (!timerOn) {
+
+                    return;
+                  }
+                  document.getElementById("countdown").innerHTML = `OTP is no longer Valid.`;
+                  location.href = "{{ url_for('expire_otp_forget_pass') }}";
+
+                }
+                timer(60);
+              </script>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

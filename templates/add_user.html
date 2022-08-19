@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% from "includes/_formHelper.html" import render_field %}
+
+{% block content %}
+    <link href="{{ url_for('static',filename='css/register.css') }}" rel="stylesheet">
+
+<div class="container mt-3">
+{% with messages = get_flashed_messages(category_filter=["success"]) %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+{% with messages = get_flashed_messages(category_filter=["warning"]) %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+{% endwith %}
+
+
+{% with messages = get_flashed_messages(category_filter=["error"]) %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+{% endwith %}
+
+</div>
+
+<style>
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 3000px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+</style>
+
+
+
+
+
+
+<section class="vh-200 gradient-custom">
+
+  <div class="mask d-flex align-items-center h-200 gradient-custom-3">
+    <div class="container h-200">
+      <div class="row d-flex justify-content-center align-items-center h-200">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+
+              <form method="POST">
+                {{ form.csrf_token }}
+                 <div class="form-outline mb-3"><span style="color:red;">*</span>
+                    {{ render_field(form.name, class="form-control") }}
+                      <br/>
+                  </div>
+
+                 <div class="form-outline mb-3"><span style="color:red;">*</span>
+                    {{ render_field(form.username, class="form-control") }}
+                      <br/>
+                  </div>
+
+                <div class="form-outline mb-3"><span style="color:red;">*</span>
+                    {{ render_field(form.dob, class="form-control") }}
+                  <br/>
+                </div>
+
+                 <div class="form-outline mb-3">
+                    {{ render_field(form.address, class="form-control") }}
+                      <br/>
+                  </div>
+
+                  <div class="form-outline mb-3">
+                    {{ render_field(form.gender, class="form-control",style="list-style-type:none;") }}
+                      <br/>
+                  </div>
+
+                  <div class="form-outline mb-3"><span style="color:red;">*</span>
+                    {{ render_field(form.email, class="form-control") }}
+                      <br/>
+                  </div>
+
+                  <div class="form-outline mb-3"><span style="color:red;">*</span>
+                    {{ render_field(form.password_hash, class="form-control") }}
+                      <a href="{{ url_for('random_pass') }}" target="_blank">
+                        <button type="button" class="btn btn-primary btn-rounded" style="margin-top:5px">Password Generator</button>
+                    </a>
+                      <br/>
+                      <br/>
+                      <div class="dropdown">
+                          <button class="dropbtn">Password Requirements</button>
+                          <div class="dropdown-content">
+                              <p>Minimum length: 8</p>
+                              <p>Minimum 2 uppercase letters</p>
+                              <p>Minimum 2 digits</p>
+                              <p>Minimum 2 special characters</p>
+                              <p>Minimum 2 non-letter characters (digits, specials, anything)</p>
+                          </div>
+                      </div>
+                  </div>
+                <br/>
+                  <div class="form-outline mb-3"><span style="color:red;">*</span>
+                    {{ render_field(form.password_hash2, class="form-control") }}
+                      <br/>
+                  </div>
+                  <div class="form-outline mb-3">
+                      {{ render_field(form.recaptcha, class="form-control") }}
+                {% if recaptcha_error %}
+                  <p style="color:#FF0000">{{ recaptcha_error }}</p>
+                {% endif %}
+              </div>
+
+                <div class="d-flex justify-content-center">
+                    {{ form.submit(class="btn btn-success btn-block btn-lg gradient-custom-4 text-body") }}
+                </div>
+                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="{{ url_for('login') }}"
+                    class="fw-bold text-body"><u>Login here</u></a></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<br/><br/>
+
+
+
+{% endblock %}

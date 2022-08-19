@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-3">
+{% with messages = get_flashed_messages(category_filter=["success"]) %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+{% with messages = get_flashed_messages(category_filter=["warning"]) %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+{% endwith %}
+
+
+{% with messages = get_flashed_messages(category_filter=["error"]) %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+{% endwith %}
+
+</div>
+
+    <div class="container">
+      <div class="card my-10">
+        <div class="card-body">
+          <h1 class="h3 mb-2">Account Safety</h1>
+          <h5 class="text-teal-700">This page summarizes what you should do if your account is vulnerable</h5>
+          <hr>
+          <p class="text-gray-700">We understand that your security matters the most to you.</p>
+          <p class="text-gray-700">If you landed up here, you might have been receiving SMS and/or Emails of activities that you did not do.</p>
+          <p class="text-gray-700">Below summarizes the steps you should take to ensure your account is secured</p>
+          <hr>
+          <div class="space-y-3">
+            <p class="text-gray-700">
+              <ol style="list-style-type: decimal">
+                <li>Log in to your account and view your dashboard information. Check that no information has been changed
+                  <ol style="list-style-type: decimal">
+                    <li>If you find any changes, change them back immediately.</li>
+                    <li>It is highly recommended that you change your password.</li>
+                  </ol>
+                </li>
+                <br/>
+
+                <li>While Logged in, check the Blog Post section found in the naviagtion bar. Check to see if there are any posts under your username.
+                  <ol style="list-style-type: decimal">
+                    <li>If there are blogs under your username that you did not write, DELETE the posts immediately.</li>
+                    <li>It is highly recommended that you change your password.</li>
+                  </ol>
+                </li>
+                <br/>
+                <li>Check other services such as Youtube, Google, etc...
+                <ol style="list-style-type: decimal">
+                    <li>If your password is compromised, it is highly likely that attackers would be trying to access other services using your credentials</li>
+                    <li>It is highly recommended that you change your password for all sites.</li>
+                </ol>
+                </li>
+              </ol>
+
+          </div>
+          <hr>
+          <a class="btn btn-primary" href="{{ url_for('email_tel_verify_forgetpass') }}" target="_self">Change Password</a>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

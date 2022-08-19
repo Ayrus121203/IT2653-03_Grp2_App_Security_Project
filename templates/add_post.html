@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% from "includes/_formHelper.html" import render_field %}
+{% block content %}
+
+
+
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+{% endfor %}
+
+<h1>Add Blog Post: </h1>
+<br/>
+<div class="shadow p-3 mb-5 bg-body rounded">
+<form method="POST">
+        {{ form.csrf_token }}
+
+        <div class="form-outline mb-3" style="color:#00e6c7"><span style="color:red;">*</span>
+        {{ render_field(form.title, class="form-control") }}
+          <br/>
+      </div>
+
+          <div class="form-outline mb-3" style="color:#00e6c7">
+        {{ render_field(form.slug, class="form-control") }}
+          <br/>
+      </div>
+              <div class="form-outline mb-3" style="color:#00e6c7"><span style="color:red;">*</span>
+        {{ render_field(form.content, class="form-control") }}
+          <br/>
+      </div>
+
+    {{ form.submit(class="btn btn-primary") }}
+
+</form>
+
+
+</div>
+
+
+{% endblock %}

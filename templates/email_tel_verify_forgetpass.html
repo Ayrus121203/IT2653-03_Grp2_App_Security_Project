@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% from "includes/_formHelper.html" import render_field %}
+{% block content %}
+<link href="{{ url_for('static',filename='css/register.css') }}" rel="stylesheet">
+
+<div class="container mt-3">
+{% with messages = get_flashed_messages(category_filter=["success"]) %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+{% with messages = get_flashed_messages(category_filter=["warning"]) %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+{% endwith %}
+
+
+{% with messages = get_flashed_messages(category_filter=["error"]) %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+{% endwith %}
+
+</div>
+<section class="vh-200 gradient-custom">
+  <div class="mask d-flex align-items-center h-200 gradient-custom-3">
+    <div class="container h-200">
+      <div class="row d-flex justify-content-center align-items-center h-200">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Verify Using Phone Number</h2>
+              <h6 class="text-uppercase text-center mb-5">To verify your identity, we would require you to enter your Registered Email and Registered Phone Number. For this process, a link will be sent to your Email</h6>
+              <form method="POST">
+
+                  {{ form.csrf_token }}
+                <div class="form-outline form-black mb-4">
+                    {{ render_field(form.email_verify, class="form-control") }}
+                      <br/>
+                  </div>
+
+                 <div class="form-outline mb-3">
+                    {{ render_field(form.countryCode, class="form-control") }}
+                      <br/>
+                  </div>
+
+                  <div class="form-outline mb-3">
+                    {{ render_field(form.telnoverify, class="form-control") }}
+                      <br/>
+                  </div>
+
+                <div class="form-outline form-black mb-4">
+              {{ form.submit(class="btn btn-outline-dark btn-lg px-5") }}
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+

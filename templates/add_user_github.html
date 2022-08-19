@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% from "includes/_formHelper.html" import render_field %}
+
+{% block content %}
+    <link href="{{ url_for('static',filename='css/github_register.css') }}" rel="stylesheet">
+
+
+<div class="container mt-3">
+{% with messages = get_flashed_messages(category_filter=["success"]) %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+{% with messages = get_flashed_messages(category_filter=["warning"]) %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+{% endwith %}
+
+{% with messages = get_flashed_messages(category_filter=["error"]) %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+{% endwith %}
+</div>
+<section style="background-image: url(static/images/github_bg.gif); border-radius:50px">
+  <div class="mask d-flex align-items-center h-200 gradient-custom-3">
+    <div class="container h-200">
+      <div class="row d-flex justify-content-center align-items-center h-200">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;background-color:#141e32;color:#6478aa">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Create an account using<br/>
+                <img src="{{ url_for('static', filename='images/github_banner.png') }}" width="20%"/>
+              </h2>
+
+              <form method="POST">
+                {{ form.csrf_token }}
+                <div class="form-outline mb-3" style="color:#00e6c7"><span style="color:red;">*</span>
+                    {{ render_field(form.name, class="form-control") }}
+                      <br/>
+                  </div>
+
+                <div class="form-outline mb-3" style="color:#00e6c7"><span style="color:red;">*</span>
+                    {{ render_field(form.username, class="form-control",value = git_username) }}
+                      <br/>
+                  </div>
+
+                <div class="form-outline mb-3" style="color:#00e6c7"><span style="color:red;">*</span>
+                    {{ render_field(form.dob, class="form-control") }}
+                      <br/>
+                </div>
+
+                <div class="form-outline mb-3" style="color:#00e6c7">
+                    {{ render_field(form.gender, class="form-control",style="list-style-type:none;") }}
+                      <br/>
+                </div>
+
+                <div class="form-outline mb-3" style="color:#00e6c7">
+                    {{ render_field(form.address, class="form-control") }}
+                      <br/>
+                </div>
+
+                <div class="form-outline mb-3" style="color:#00e6c7"><span style="color:red;">*</span>
+                    {{ render_field(form.email, class="form-control", value = google_email) }}
+                      <br/>
+                </div>
+
+                <div class="form-outline mb-3" style="color:#00e6c7"><span style="color:red;">*</span>
+                    {{ render_field(form.countryCode, class="form-control") }}
+                      <br/>
+                </div>
+
+                <div class="form-outline mb-3" style="color:#00e6c7"><span style="color:red;">*</span>
+                    {{ render_field(form.tel_phone, class="form-control") }}
+                      <br/>
+                </div>
+
+                  <div class="form-outline mb-3">
+                      {{ render_field(form.recaptcha, class="form-control") }}
+                {% if recaptcha_error %}
+                  <p style="color:#FF0000">{{ recaptcha_error }}</p>
+                {% endif %}
+              </div>
+
+                <div class="d-flex justify-content-center">
+                  {{ form.submit(class="btn-block btn-lg gradient-login-btn") }}
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <link href="{{ url_for('static',filename='css/random_pass.css') }}" rel="stylesheet">
+
+
+
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+{% endfor %}
+
+<div class="jumbotron">
+    <h1 class="display-4" align="center">Random Password Generator</h1>
+<section class="login-clean">
+        <form method="POST">
+            <h1><strong>Password Generator</strong></h1>
+            <p class="lead">This is a built-in random password generator that gives a password length of 18, with special characters and a mix of numbers and letters. Get Secured Today!</p>
+
+            <div class="mt-5 mb-5"></div>
+            <div class="mb-3">
+                {{ form.csrf_token }}
+
+                {{ form.random_password.label(class="form-label") }}
+                {{ form.random_password(class="form-control",value= form.random_password.data) }}
+            </div>
+            <div class="mb-3 ">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+         <hr class="my-4">
+             <p align="center">Note that although these passwords are secured, they are hard to remember. We would recommend you to use other techniques.</p>
+              <p class="lead" align="center">
+                  <a class="btn btn-primary btn-lg" href="https://www.avg.com/en/signal/how-to-create-a-strong-password-that-you-wont-forget'" role="button">Password Techniques</a>
+              </p>
+</section>
+</div>
+
+
+
+
+
+
+    {% endblock %}
