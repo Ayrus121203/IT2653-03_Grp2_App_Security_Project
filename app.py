@@ -1,4 +1,3 @@
-# surya ver
 import smtplib
 import socket
 import time
